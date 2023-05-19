@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <title>Figma Live Sports Clock Plugin</title>
+  <style>
+    /* Global Styles */
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #1D1D1B;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2em;
+    }
+
+    .match{
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .match-info,
+    .clock-container,
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .scores,
+    .clock,
+    .team-name {
+      font-size: 2em;
+      text-align: center;
+      width: 33%;
+    }
+
+    .clock {
+      display: flex;
+      align-self: center;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .extra-time {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      background: white;
+      left: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .extra-time.active {
+      padding-right: 10px;
+    }
+
+    /* Styles for logo image */
+
+    .logo-container>img {
+      width: 50%;
+      margin: auto;
+    }
+
+
+    /* Styles for team names */
+
+    .team-name {
+      background-color: #21023C;
+      color: white;
+    }
+
+    .t-border-left {
+      border-left: 3px solid #75FB4C;
+    }
+
+    .t-border-right {
+      border-right: 3px solid #FFFF54;
+    }
+
+
+    /* Styles for team scores */
+
+    .scores {
+      background: #EA3940;
+      color: #FFF;
+    }
+
+    #extra-time-display {
+      font-size: 1.25rem;
+      color: #666;
+    }
+
+
+    /*  Styles for clock */
+
+    .clock {
+      background-color: #FFF;
+      width: 33%;
+    }
+
+    .actions-clock {
+      display: flex;
+      margin-top: 20px;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .actions-clock button {
+      padding: 10px;
+      border-radius: 5px;
+      border: unset;
+      cursor: pointer;
+      color: white;
+      background: black;
+    }
+
+    .list-games{
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .no-game-selected{
+      display: none;
+    }
+
+    .list-games{
+      opacity: 1;
+      z-index: 9;
+      transition: all .5s ease;
+    }
+
+    .game-selected{
+      opacity: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="logo-container">
+    <img src="https://cdn.jsdelivr.net/gh/bikatti/clock-plugin@main-3/assets/logo.png" alt="logo-lengju" >
+  </div>
+  <div class="list-games">
+    <select name="select-games" id="games-availables">
+      <option value="not-game">Select one game to watch</option>
+    </select>
+  </div>
+  <div class="match no-game-selected">
+    <div class="match-info">
+      <span class="team-name local-team t-border-left">
+        ASR
+      </span>
+      <span class="scores">
+        0-0
+      </span>
+      <span class="team-name away-team t-border-right">
+        ASR
+      </span>
+    </div>
+    <div class="clock">
+      <div class="half-time">
+        <span id="clock-display">00:00</span>
+      </div>
+      <div class="wrapper-extra-time">
+        <span id="extra-time-display"></span>
+      </div>
+    </div>
+
+    <div class="actions-clock">
+      <button id="start-clock-btn">Start Clock</button>
+      <button id="stop-clock-btn">Stop Clock</button>
+      <button id="reset-clock-btn">Reset Clock</button>
+      <button id="update-design-btn" style="display: none;">Update Figma</button>
+    </div>
+  </div>
+
+  <script async defer src="https://apis.google.com/js/api.js" id="gapi"></script>
+  <script async defer src="https://accounts.google.com/gsi/client" id="gsi"></script>
+  <script async defer src="ui.js" type="module"></script>
+</body>
+
+</html>
